@@ -18,7 +18,7 @@ public class VideoServiceTest {
     @Test
     @DisplayName("Test de obtener los videos indicando maxPages y masVideos")
     void testGetVideos() {
-        DmVideos videos = videoService.getVideos("shortfilms", 2, 1);
+        DmVideos videos = videoService.getVideos("shortfilms", 1, 2);
         assertNotNull(videos);
         System.out.println(videos);
     }
