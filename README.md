@@ -2,7 +2,7 @@
 
 ## Miembros del grupo L1-5
 
-1.López Vázquez, Rubén
+1. López Vázquez, Rubén
 2. Márquez Molina, Álvaro
 3. Martínez de Eulate Barbarin, Gonzalo
 4. Sabbar Moukhlissi, Alaa
