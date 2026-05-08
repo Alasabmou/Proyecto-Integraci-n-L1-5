@@ -1,10 +1,12 @@
 package aiss.videominer.controller;
 
+import aiss.videominer.exception.CaptionNotFoundException;
 import aiss.videominer.exception.ChannelNotFoundException;
 import aiss.videominer.model.Channel;
 import aiss.videominer.model.Video;
 import aiss.videominer.repository.ChannelRepository;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -30,14 +32,11 @@ public class ChannelController {
     ChannelRepository channelRepository;
 
 
-    @Operation(summary = "Obtener todos los canales",
-            description = "Devuelve una lista de todos los canales registrados")
+    @Operation(summary = "Obtener todos los canales", description = "Devuelve una lista de todos los canales registrados")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Lista de canales devuelta con éxito",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Channel.class)) })
+        @ApiResponse(responseCode = "200", description = "Lista de canales devuelta con éxito",
+                content = @Content(array = @ArraySchema(schema = @Schema(implementation = Channel.class))))
     })
-    //GET http://localhost:8080/api/videominer/channels
     @GetMapping
     public List<Channel> getAllChannels() {
         List<Channel> _channels = channelRepository.findAll();
@@ -49,13 +48,10 @@ public class ChannelController {
 
     @Operation(summary = "Obtener un canal por ID", description = "Devuelve el canal asociado al ID dado")
     @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Canal encontrado",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Channel.class)) }),
-            @ApiResponse(responseCode = "404", description = "Canal no encontrado",
-                    content = @Content) // content = @Content indica que no devuelve el modelo Channel, sino un error
+        @ApiResponse(responseCode = "200", description = "Canal encontrado",
+                content = @Content(schema = @Schema(implementation = Channel.class))),
+        @ApiResponse(responseCode = "404", description = "Canal no encontrado")
     })
-//GET http://localhost:8080/api/videominer/channels/{id}
     @GetMapping("/{id}")
     public Channel getCommentById(@PathVariable String id) throws ChannelNotFoundException {
         Optional<Channel> _channel = channelRepository.findById(id);
@@ -68,29 +64,26 @@ public class ChannelController {
 
 
 
-    @Operation(summary = "Crear un canal", description = "Creacion de un canal a partir de uno valores")
+    @Operation(summary = "Crear un canal", description = "Crea un nuevo canal con sus vídeos, comentarios, captions y usuario asociado")
     @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "Canal creado con éxito",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Channel.class)) }),
-            @ApiResponse(responseCode = "400", description = "Datos del canal incorrectos o mal formados",
-                    content = @Content)
+        @ApiResponse(responseCode = "201", description = "Canal creado con éxito",
+                content = @Content(schema = @Schema(implementation = Channel.class))),
+        @ApiResponse(responseCode = "400", description = "Datos del canal incorrectos o mal formados")
     })
-    //POST http://localhost:8080/api/videominer/channels
     @PostMapping
     public Channel createChannel(@RequestBody @Valid Channel channel) {
         return channelRepository.save(channel);
     } 
 
-    @Operation(summary = "Crear un video en un canal", description = "Añade un nuevo vídeo al canal especificado por su ID")
-    @ApiResponses({
-            @ApiResponse(responseCode = "201", description = "Video creado con éxito",
-                    content = { @Content(mediaType = "application/json",
-                            schema = @Schema(implementation = Video.class)) }), // Cambiado a Video.class
-            @ApiResponse(responseCode = "400", description = "Datos del video incorrectos o mal formados",
-                    content = @Content),
-            @ApiResponse(responseCode = "404", description = "Canal no encontrado",
-                    content = @Content)
+
+
+
+   @Operation(summary = "Crear un vídeo en un canal", description = "Añade un nuevo vídeo al canal especificado por su ID")
+   @ApiResponses({
+        @ApiResponse(responseCode = "201", description = "Vídeo creado con éxito",
+                content = @Content(schema = @Schema(implementation = Video.class))),
+        @ApiResponse(responseCode = "400", description = "Datos del vídeo incorrectos o mal formados"),
+        @ApiResponse(responseCode = "404", description = "Canal no encontrado")
     })
     @PostMapping("/{id}/videos")
     public Video createVideoChannel(@PathVariable String id, @RequestBody @Valid Video video) throws ChannelNotFoundException {
@@ -111,12 +104,15 @@ public class ChannelController {
 
     
     @Operation(summary = "Eliminar un canal por ID", description = "Elimina el canal asociado al ID dado")
-    @ApiResponses(
-            @ApiResponse(responseCode = "204", description = "canal eliminado",
-                    content = @Content(schema = @Schema(implementation = Channel.class))))
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @ApiResponses({
+        @ApiResponse(responseCode = "204", description = "Canal eliminado"),
+        @ApiResponse(responseCode = "404", description = "Canal no encontrado")
+})
     @DeleteMapping("/{id}")
-    public void deleteOne(@PathVariable String id) {
-        if(channelRepository.existsById(id)) channelRepository.deleteById(id);
+    public void deleteOne(@PathVariable String id) throws ChannelNotFoundException {
+        if(!channelRepository.existsById(id)){
+            throw new ChannelNotFoundException();
+        }
+        channelRepository.deleteById(id);
     }
 }

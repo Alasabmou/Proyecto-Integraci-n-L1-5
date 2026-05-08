@@ -11,7 +11,7 @@
 Este proyecto contiene un sistema distribuido diseñado para la extracción, transformación y carga (ETL) de datos provenientes de diversas plataformas de vídeo. El sistema está compuesto por tres microservicios independientes:
 
 1. PeerTubeMiner: procesa la información de la API REST de PeerTube y la envía a VideoMiner.
-2. DailyMotionMiner: lee los datos desde la API REST de DayliMotion y los envía a VideoMiner.
+2. DailyMotionMiner: lee los datos desde la API REST de DailyMotion y los envía a VideoMiner.
 3. VideoMiner: Implementa una API REST para almacenar e integrar canales, vídeos, usuarios, comentarios y subtítulos.
 
 
@@ -43,8 +43,14 @@ Expone la información almacenada en base de datos.
   - `GET /{id}/comments` - Listar comentarios asociados a un vídeo.
   - `GET /{id}/captions` - Listar subtítulos asociados a un vídeo.
   - `DELETE /{id}` - Eliminar un vídeo.
-- Comentarios (`/api/videominer/comments`): Búsqueda por ID, listado total y borrado.
-- Subtítulos (`/api/videominer/captions`): Búsqueda por ID, listado total y borrado.
+- Comentarios (`/api/videominer/comments`):
+  -  `GET /` - Listar todos los comentarios.
+  - `GET /{id}` - Obtener un comentario por su ID.
+  - `DELETE /{id}` - Eliminar un comentario.
+- Subtítulos (`/api/videominer/captions`):
+  -  `GET /` - Listar todos los subtitulos.
+  - `GET /{id}` - Obtener un subtitulo por su ID.
+  - `DELETE /{id}` - Eliminar un subtitulo.
 
 ### 2. DailyMotionMiner
 Se encarga del flujo ETL desde Dailymotion.

@@ -21,7 +21,7 @@ public class VideoService {
         DmVideos videos = restTemplate.getForObject(uri, DmVideos.class);
         if (maxPages > 1) {
             for (int i = 2; i <= maxPages; i++) {
-                String uriAux = baseUri +"videos?channel=" + channel + "&limit=" + maxVideos + "&page=" + maxPages +"&fields=id,title,description,created_time,tags";
+                String uriAux = baseUri +"videos?channel=" + channel + "&limit=" + maxVideos + "&page=" + i +"&fields=id,title,description,created_time,tags";
                 DmVideos videosAux = restTemplate.getForObject(uriAux, DmVideos.class);
                 videos.getList().addAll(videosAux.getList());
             }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import aiss.videominer.exception.CaptionNotFoundException;
+import aiss.videominer.exception.ChannelNotFoundException;
 import aiss.videominer.model.Caption;
 import aiss.videominer.repository.CaptionRepository;
 import aiss.videominer.repository.VideoRepository;
@@ -33,10 +34,11 @@ public class CaptionsController {
     @Autowired
     VideoRepository videoRepository;
 
-
-    @Operation(summary = "Obtener todos los subtítulos", description = "Devuelve una lista de todos los subtítulos")
-    @ApiResponse(responseCode = "200", description = "Lista de subtitulos",
-            content = @Content(array = @ArraySchema(schema = @Schema(implementation = Caption.class))))
+    @Operation(summary = "Obtener todas las captions", description = "Devuelve una lista de todas las captions almacenadas")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Lista de captions obtenida correctamente",
+                content = @Content(array = @ArraySchema(schema = @Schema(implementation = Caption.class))))
+    })
     @GetMapping
     public List<Caption> findAll() {
         List<Caption> _captions = captionsRepository.findAll();
@@ -46,11 +48,13 @@ public class CaptionsController {
 
     
 
-    @Operation(summary = "Obtener un subtítulo por ID", description = "Devuelve el subtítulo asociado al ID dado")
-    @ApiResponses(
-            @ApiResponse(responseCode = "200", description = "Subtítulo encontrado",
-                    content = @Content(schema = @Schema(implementation = Caption.class))))
-    @GetMapping("/{id}") 
+    @Operation(summary = "Obtener una caption por ID", description = "Devuelve la caption asociada al ID dado")
+    @ApiResponses({
+        @ApiResponse(responseCode = "200", description = "Caption encontrada",
+                content = @Content(schema = @Schema(implementation = Caption.class))),
+        @ApiResponse(responseCode = "404", description = "Caption no encontrada")
+    })
+    @GetMapping("/{id}")
     public Caption findOne(@PathVariable String id) throws CaptionNotFoundException {
         Optional<Caption> _captions = captionsRepository.findById(id);
         if (!_captions.isPresent()) {
@@ -63,13 +67,16 @@ public class CaptionsController {
 
 
 
-    @Operation(summary = "Eliminar un subtítulo por ID", description = "Elimina el subtítulo asociado al ID dado")
-    @ApiResponses(
-            @ApiResponse(responseCode = "204", description = "Subtítulo encontrado",
-                    content = @Content(schema = @Schema(implementation = Caption.class))))
-    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @Operation(summary = "Eliminar una caption por ID", description = "Elimina la caption asociada al ID dado")
+    @ApiResponses({
+        @ApiResponse(responseCode = "204", description = "Caption eliminada"),
+        @ApiResponse(responseCode = "404", description = "Caption no encontrada")
+    })
     @DeleteMapping("/{id}")
-    public void deleteOne(@PathVariable String id) {
-        if(captionsRepository.existsById(id)) captionsRepository.deleteById(id);
+    public void deleteOne(@PathVariable String id) throws CaptionNotFoundException {
+        if(!captionsRepository.existsById(id)){
+            throw new CaptionNotFoundException();
+        }
+        captionsRepository.deleteById(id);
     }
 }
