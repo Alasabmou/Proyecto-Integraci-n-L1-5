@@ -2,10 +2,12 @@
 
 ## Miembros del grupo L1-5
 
-1. Márquez Molina, Álvaro
-2. Martínez de Eulate Barbarin, Gonzalo
-3. Sabbar Moukhlissi, Alaa
-4. Sánchez Gago, Carla
+1.López Vázquez, Rubén
+2. Márquez Molina, Álvaro
+3. Martínez de Eulate Barbarin, Gonzalo
+4. Sabbar Moukhlissi, Alaa
+5. Sánchez Gago, Carla
+   
 
 ## Descripción del Proyecto
 Este proyecto contiene un sistema distribuido diseñado para la extracción, transformación y carga (ETL) de datos provenientes de diversas plataformas de vídeo. El sistema está compuesto por tres microservicios independientes:
