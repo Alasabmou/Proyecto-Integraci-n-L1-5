@@ -16,6 +16,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -108,6 +109,7 @@ public class VideoController {
         @ApiResponse(responseCode = "204", description = "Video eliminado"),
         @ApiResponse(responseCode = "404", description = "Video no encontrado")
     })
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void deleteOne(@PathVariable String id) throws VideoNotFoundException {
         if(!videoRepository.existsById(id)){

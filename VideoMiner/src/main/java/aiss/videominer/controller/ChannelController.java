@@ -70,6 +70,7 @@ public class ChannelController {
                 content = @Content(schema = @Schema(implementation = Channel.class))),
         @ApiResponse(responseCode = "400", description = "Datos del canal incorrectos o mal formados")
     })
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
     public Channel createChannel(@RequestBody @Valid Channel channel) {
         return channelRepository.save(channel);
@@ -85,6 +86,7 @@ public class ChannelController {
         @ApiResponse(responseCode = "400", description = "Datos del vídeo incorrectos o mal formados"),
         @ApiResponse(responseCode = "404", description = "Canal no encontrado")
     })
+    @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("/{id}/videos")
     public Video createVideoChannel(@PathVariable String id, @RequestBody @Valid Video video) throws ChannelNotFoundException {
         Optional<Channel> _channel = channelRepository.findById(id);
@@ -107,7 +109,8 @@ public class ChannelController {
     @ApiResponses({
         @ApiResponse(responseCode = "204", description = "Canal eliminado"),
         @ApiResponse(responseCode = "404", description = "Canal no encontrado")
-})
+    })
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void deleteOne(@PathVariable String id) throws ChannelNotFoundException {
         if(!channelRepository.existsById(id)){

@@ -72,6 +72,7 @@ public class CaptionsController {
         @ApiResponse(responseCode = "204", description = "Caption eliminada"),
         @ApiResponse(responseCode = "404", description = "Caption no encontrada")
     })
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void deleteOne(@PathVariable String id) throws CaptionNotFoundException {
         if(!captionsRepository.existsById(id)){

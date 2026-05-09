@@ -71,6 +71,7 @@ public class CommentController {
         @ApiResponse(responseCode = "204", description = "Comentario eliminado"),
         @ApiResponse(responseCode = "404", description = "Comentario no encontrado")
     })
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
     public void deleteOne(@PathVariable String id) throws CommentNotFoundException {
         if(!commentRepository.existsById(id)){
