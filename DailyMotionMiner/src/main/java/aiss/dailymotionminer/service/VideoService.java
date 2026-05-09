@@ -17,7 +17,7 @@ public class VideoService {
     private String baseUri;
 
     public DmVideos getVideos(String channel, Integer maxVideos, Integer maxPages) {    
-        String uri = baseUri +"videos?channel=" + channel + "&limit=" + maxVideos + "&page=" + maxPages +"&fields=id,title,description,created_time,tags";
+        String uri = baseUri +"videos?channel=" + channel + "&limit=" + maxVideos + "&page=1&fields=id,title,description,created_time,tags";
         DmVideos videos = restTemplate.getForObject(uri, DmVideos.class);
         if (maxPages > 1) {
             for (int i = 2; i <= maxPages; i++) {

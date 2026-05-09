@@ -24,6 +24,6 @@ class CommentServiceTest {
         assertNotNull(result, "El sobre no debería ser nulo");
         assertNotNull(result.getData(), "La lista de comentarios no debería ser nula");
         
-        System.out.println("✅ TEST 2: Límite forzado a " + limiteComments + ". Encontrados: " + result.getData().size());
+        System.out.println("Límite forzado a " + limiteComments + ". Encontrados: " + result.getData().size());
     }
 }

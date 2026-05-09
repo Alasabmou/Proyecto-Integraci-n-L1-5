@@ -17,7 +17,7 @@ public class SubtitleService {
     private String baseUri;
 
     public DmSubtitles getSubtitles(String videoId) {
-        String uri = baseUri + "video/" + videoId + "/subtitles?fields=id%2Curl%2Clanguage";
+        String uri = baseUri + "video/" + videoId + "/subtitles?fields=id,url,language";
         DmSubtitles subtitles = restTemplate.getForObject(uri, DmSubtitles.class);
         System.out.println(subtitles.toString());
         return subtitles;
