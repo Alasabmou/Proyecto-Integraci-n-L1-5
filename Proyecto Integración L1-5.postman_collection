@@ -8,242 +8,6 @@
   },
   "item": [
     {
-      "name": "PeerTubeMiner",
-      "item": [
-        {
-          "name": "Get Channel",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status code is 200\", function () {\r",
-                  "    pm.response.to.have.status(200);\r",
-                  "});\r",
-                  "\r",
-                  "var jsonData = pm.response.json();\r",
-                  "\r",
-                  "pm.test(\"id property should exist\", function () {\r",
-                  "    pm.expect(jsonData).to.have.property(\"id\");\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"videos property should have at most 2 elements\", function () {\r",
-                  "    pm.expect(jsonData[\"videos\"].length).to.be.at.most(2);\r",
-                  "});"
-                ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:8082/api/peertube/framaconf?maxComments=5&maxVideos=2",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8082",
-              "path": [
-                "api",
-                "peertube",
-                "framaconf"
-              ],
-              "query": [
-                {
-                  "key": "maxComments",
-                  "value": "5"
-                },
-                {
-                  "key": "maxVideos",
-                  "value": "2",
-                  "type": "text"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Post Channel",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status code is 201\", function () {\r",
-                  "    pm.response.to.have.status(201);\r",
-                  "});\r",
-                  "\r",
-                  "var jsonData = pm.response.json();\r",
-                  "\r",
-                  "pm.test(\"id property should exist\", function () {\r",
-                  "    pm.expect(jsonData).to.have.property(\"id\");\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"videos property should have at most 2 elements\", function () {\r",
-                  "    pm.expect(jsonData[\"videos\"].length).to.be.at.most(2);\r",
-                  "});"
-                ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:8082/api/peertube/framaconf?maxComments=5&maxVideos=2",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8082",
-              "path": [
-                "api",
-                "peertube",
-                "framaconf"
-              ],
-              "query": [
-                {
-                  "key": "maxComments",
-                  "value": "5"
-                },
-                {
-                  "key": "maxVideos",
-                  "value": "2",
-                  "type": "text"
-                }
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
-      "name": "DailyMotionMiner",
-      "item": [
-        {
-          "name": "Get channel",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status code is 200\", function () {\r",
-                  "    pm.response.to.have.status(200);\r",
-                  "});\r",
-                  "\r",
-                  "var jsonData = pm.response.json();\r",
-                  "\r",
-                  "pm.test(\"id property should exist\", function () {\r",
-                  "    pm.expect(jsonData).to.have.property(\"id\");\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"videos property should have at most 2 elements\", function () {\r",
-                  "    pm.expect(jsonData[\"videos\"].length).to.be.at.most(2);\r",
-                  "});"
-                ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
-              }
-            }
-          ],
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:8081/api/dailymotion/shortfilms?maxVideos=2&maxPages=1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8081",
-              "path": [
-                "api",
-                "dailymotion",
-                "shortfilms"
-              ],
-              "query": [
-                {
-                  "key": "maxVideos",
-                  "value": "2"
-                },
-                {
-                  "key": "maxPages",
-                  "value": "1"
-                }
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "Post channel",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Status code is 201\", function () {\r",
-                  "    pm.response.to.have.status(201);\r",
-                  "});\r",
-                  "\r",
-                  "var jsonData = pm.response.json();\r",
-                  "\r",
-                  "pm.test(\"id property should exist\", function () {\r",
-                  "    pm.expect(jsonData).to.have.property(\"id\");\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"videos property should have at most 2 elements\", function () {\r",
-                  "    pm.expect(jsonData[\"videos\"].length).to.be.at.most(2);\r",
-                  "});"
-                ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [],
-            "url": {
-              "raw": "http://localhost:8081/api/dailymotion/shortfilms?maxVideos=2&maxPages=1",
-              "protocol": "http",
-              "host": [
-                "localhost"
-              ],
-              "port": "8081",
-              "path": [
-                "api",
-                "dailymotion",
-                "shortfilms"
-              ],
-              "query": [
-                {
-                  "key": "maxVideos",
-                  "value": "2"
-                },
-                {
-                  "key": "maxPages",
-                  "value": "1"
-                }
-              ]
-            }
-          },
-          "response": []
-        }
-      ]
-    },
-    {
       "name": "VideoMiner",
       "item": [
         {
@@ -871,10 +635,7 @@
                   "pm.test(\"Status code is 204\", function () {\r",
                   "    pm.response.to.have.status(204);\r",
                   "});\r",
-                  "\r",
-                  "pm.test(\"Status code is 404\", function () {\r",
-                  "    pm.response.to.have.status(404);\r",
-                  "});"
+                  ""
                 ],
                 "type": "text/javascript",
                 "packages": {},
@@ -917,10 +678,6 @@
                 "exec": [
                   "pm.test(\"Status code is 204\", function () {\r",
                   "    pm.response.to.have.status(204);\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Status code is 404\", function () {\r",
-                  "    pm.response.to.have.status(404);\r",
                   "});"
                 ],
                 "type": "text/javascript",
@@ -965,10 +722,6 @@
                 "exec": [
                   "pm.test(\"Status code is 204\", function () {\r",
                   "    pm.response.to.have.status(204);\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Status code is 404\", function () {\r",
-                  "    pm.response.to.have.status(404);\r",
                   "});"
                 ],
                 "type": "text/javascript",
@@ -1012,10 +765,6 @@
                 "exec": [
                   "pm.test(\"Status code is 204\", function () {\r",
                   "    pm.response.to.have.status(204);\r",
-                  "});\r",
-                  "\r",
-                  "pm.test(\"Status code is 404\", function () {\r",
-                  "    pm.response.to.have.status(404);\r",
                   "});"
                 ],
                 "type": "text/javascript",
@@ -1044,6 +793,242 @@
                 {
                   "key": "id",
                   "value": "80"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "PeerTubeMiner",
+      "item": [
+        {
+          "name": "Get Channel",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "var jsonData = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"id property should exist\", function () {\r",
+                  "    pm.expect(jsonData).to.have.property(\"id\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"videos property should have at most 2 elements\", function () {\r",
+                  "    pm.expect(jsonData[\"videos\"].length).to.be.at.most(2);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8082/api/peertube/framaconf?maxComments=5&maxVideos=2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8082",
+              "path": [
+                "api",
+                "peertube",
+                "framaconf"
+              ],
+              "query": [
+                {
+                  "key": "maxComments",
+                  "value": "5"
+                },
+                {
+                  "key": "maxVideos",
+                  "value": "2",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Post Channel",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "var jsonData = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"id property should exist\", function () {\r",
+                  "    pm.expect(jsonData).to.have.property(\"id\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"videos property should have at most 2 elements\", function () {\r",
+                  "    pm.expect(jsonData[\"videos\"].length).to.be.at.most(2);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8082/api/peertube/framaconf?maxComments=5&maxVideos=2",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8082",
+              "path": [
+                "api",
+                "peertube",
+                "framaconf"
+              ],
+              "query": [
+                {
+                  "key": "maxComments",
+                  "value": "5"
+                },
+                {
+                  "key": "maxVideos",
+                  "value": "2",
+                  "type": "text"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "DailyMotionMiner",
+      "item": [
+        {
+          "name": "Get channel",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "});\r",
+                  "\r",
+                  "var jsonData = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"id property should exist\", function () {\r",
+                  "    pm.expect(jsonData).to.have.property(\"id\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"videos property should have at most 2 elements\", function () {\r",
+                  "    pm.expect(jsonData[\"videos\"].length).to.be.at.most(2);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/dailymotion/shortfilms?maxVideos=2&maxPages=1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "dailymotion",
+                "shortfilms"
+              ],
+              "query": [
+                {
+                  "key": "maxVideos",
+                  "value": "2"
+                },
+                {
+                  "key": "maxPages",
+                  "value": "1"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Post channel",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Status code is 201\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "});\r",
+                  "\r",
+                  "var jsonData = pm.response.json();\r",
+                  "\r",
+                  "pm.test(\"id property should exist\", function () {\r",
+                  "    pm.expect(jsonData).to.have.property(\"id\");\r",
+                  "});\r",
+                  "\r",
+                  "pm.test(\"videos property should have at most 2 elements\", function () {\r",
+                  "    pm.expect(jsonData[\"videos\"].length).to.be.at.most(2);\r",
+                  "});"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "http://localhost:8081/api/dailymotion/shortfilms?maxVideos=2&maxPages=1",
+              "protocol": "http",
+              "host": [
+                "localhost"
+              ],
+              "port": "8081",
+              "path": [
+                "api",
+                "dailymotion",
+                "shortfilms"
+              ],
+              "query": [
+                {
+                  "key": "maxVideos",
+                  "value": "2"
+                },
+                {
+                  "key": "maxPages",
+                  "value": "1"
                 }
               ]
             }
