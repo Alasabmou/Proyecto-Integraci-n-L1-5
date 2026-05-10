@@ -19,11 +19,9 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import aiss.videominer.exception.CaptionNotFoundException;
 import aiss.videominer.exception.CommentNotFoundException;
 import aiss.videominer.model.Comment;
 import aiss.videominer.repository.CommentRepository;
-import aiss.videominer.repository.VideoRepository;
 
 @RestController
 @RequestMapping("/api/videominer/comments")

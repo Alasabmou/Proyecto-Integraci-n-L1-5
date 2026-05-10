@@ -1,6 +1,5 @@
 package aiss.videominer.controller;
 
-import aiss.videominer.exception.CaptionNotFoundException;
 import aiss.videominer.exception.ChannelNotFoundException;
 import aiss.videominer.model.Channel;
 import aiss.videominer.model.Video;

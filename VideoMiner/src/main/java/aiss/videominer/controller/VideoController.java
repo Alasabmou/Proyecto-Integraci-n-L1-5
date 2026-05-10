@@ -1,7 +1,6 @@
 package aiss.videominer.controller;
 
 
-import aiss.videominer.exception.CommentNotFoundException;
 import aiss.videominer.exception.VideoNotFoundException;
 import aiss.videominer.model.Caption;
 import aiss.videominer.model.Comment;
